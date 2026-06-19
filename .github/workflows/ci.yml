@@ -1,0 +1,49 @@
+name: Integración Continua - Landing Page Política
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validar-estructura:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar el código fuente
+      uses: actions/checkout@v4
+
+    - name: Validar estructura mínima del proyecto
+      run: |
+        echo "=== Iniciando validación de archivos obligatorios ==="
+        
+        if [ -f "index.html" ]; then
+          echo "✔ index.html existe correctamente."
+        else
+          echo "❌ ERROR: No se encuentra index.html en la raíz."
+          exit 1
+        fi
+
+        if [ -f "css/style.css" ]; then
+          echo "✔ css/style.css existe correctamente."
+        else
+          echo "❌ ERROR: No se encuentra css/style.css."
+          exit 1
+        fi
+
+        if [ -f "js/script.js" ]; then
+          echo "✔ js/script.js existe correctamente."
+        else
+          echo "❌ ERROR: No se encuentra js/script.js."
+          exit 1
+        fi
+
+        if [ -f "README.md" ]; then
+          echo "✔ README.md existe correctamente."
+        else
+          echo "❌ ERROR: No se encuentra README.md en la raíz."
+          exit 1
+        fi
+        
+        echo "=== ¡Estructura validada con éxito! ==="
